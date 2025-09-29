@@ -1,5 +1,5 @@
 #!/bin/bash
-# Rename files without worrying to much
+# Rename files without worrying too much
 
 if [ $# -ne 2 ]; then
 	echo "Usage: rename <old> <new>"
