@@ -1,0 +1,23 @@
+#!/bin/bash
+# Rename files without worrying to much
+
+if [ $# -ne 2 ]; then
+	echo "Usage: rename <old> <new>"
+	exit 1
+fi
+
+old="$1"
+new="$2"
+
+if [ ! -e "$old" ]; then
+	echo "Error: '$old' does not exist."
+	exit 1
+fi
+
+
+if [ -e $new ]; then
+	echo "Error: '$new' already exists. Rename aborted."
+	exit 1
+fi
+
+mv -- "$old" "$new" && echo "Renamed '$old' -> '$new'"
