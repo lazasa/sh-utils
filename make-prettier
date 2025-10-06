@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Define Prettier config as a multiline string
+read -r -d '' text <<'EOF'
+{
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid",
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "proseWrap": "always",
+  "endOfLine": "lf"
+}
+EOF
+
+# Check if .prettierrc already exists
+if [ -f ".prettierrc" ]; then
+  echo ".prettierrc already exists."
+else
+  echo "Creating .prettierrc..."
+  echo "$text" > .prettierrc && echo ".prettierrc file created with standard config."
+fi
