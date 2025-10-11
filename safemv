@@ -1,0 +1,44 @@
+#!/bin/bash
+
+error() {
+	echo "Error: $1" >&2
+	exit 1
+}
+
+success() {
+	echo "Success! $1"
+}
+
+if [ $# -lt 2 ]; then
+	echo "Usage: $0 <source> <target>"
+	exit 1
+fi
+
+source_path="$1"
+target_path="$2"
+
+if [ ! -e "$source_path" ]; then
+	error "Source path does not exist: $source_path"
+fi
+
+if [ -e "$target_path" ]; then
+	echo "Target $target_path already exists."
+	read -p "Overwrite? (y/n): " confirm
+	if [[ ! "$confirm" =~ ^[yY]$ ]]; then
+		echo "Cancelled."
+		exit 1
+	fi
+fi
+
+mkdir -p "$(dirname "$target_path")" || error "Couldn't create target directory."
+
+echo "Moving '$source_path' to '$target_path'..."
+if mv -v "$source_path" "$target_path"; then
+	success "Move completed."
+else 
+	error "Couldn't move."
+fi
+
+
+
+
